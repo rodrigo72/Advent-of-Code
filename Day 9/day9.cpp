@@ -65,15 +65,6 @@ void single_step (Position& head, Direction direction) {
 };
 
 void follow_step (Direction dir, Position& head, Position& tail) {
-    // if (abs(head.row - tail.row) >= 2 || abs(head.col - tail.col) >= 2) {
-    //     switch (dir) {
-    //         case Direction::DOWN:  tail.col = head.col;     tail.row = head.row + 1;break;
-    //         case Direction::UP:    tail.col = head.col;     tail.row = head.row - 1;break;
-    //         case Direction::LEFT:  tail.col = head.col + 1; tail.row = head.row;    break;
-    //         case Direction::RIGHT: tail.col = head.col - 1; tail.row = head.row;    break;
-    //         default: throw std::runtime_error("Invalid direction");
-    //     }
-    // }
     int row_difference = head.row - tail.row;
     int col_difference = head.col - tail.col;
 
