@@ -5,21 +5,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_set>
-#include <unordered_map>
 
-enum class Direction {
-    RIGHT, LEFT, UP, DOWN
-};
-
-std::string direction_to_string (Direction direction) {
-    switch (direction) {
-        case Direction::RIGHT: return "RIGHT";
-        case Direction::LEFT: return "LEFT";
-        case Direction::UP: return "UP";
-        case Direction::DOWN: return "DOWN";
-        default: return "UNKNOWN";
-    }
-}
+enum class Direction { RIGHT, LEFT, UP, DOWN };
 
 struct Order {
     Direction direction;
@@ -99,9 +86,8 @@ size_t simulate_motions_extended (const std::vector<Order>& orders) {
     auto single_order = [&](const Order& order) {
         for (size_t i = 0; i < order.count; i++) {
             single_step(rope[0], order.direction);
-            for (size_t j = 1; j < rope.size(); j++) {
+            for (size_t j = 1; j < rope.size(); j++)
                 follow_step(order.direction, rope[j-1], rope[j]);
-            }
             visited.insert(rope[9]);
         }
     };
@@ -110,18 +96,15 @@ size_t simulate_motions_extended (const std::vector<Order>& orders) {
 }
 
 int main (void) {
-
     std::fstream file("input.txt");
     if (!file.is_open()) {
         std::cerr << "Could not open input file\n";
         return 1;
     }
 
-    std::vector<Order> orders;
     Order order;
-    while (file >> order) {
-        orders.push_back(order);
-    }
+    std::vector<Order> orders;
+    while (file >> order) orders.push_back(order);
 
     std::cout << simulate_motions(orders) << std::endl; // Part 1
     std::cout << simulate_motions_extended(orders) << std::endl; // Part 2
