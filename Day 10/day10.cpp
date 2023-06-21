@@ -71,13 +71,10 @@ int main (void) {
         int aux = i->get_tick_count() + tick_count;
         for (; tick_count < aux; tick_count++) {
             if (tick_count == 20 || (tick_count > 20 && (tick_count - 20) % 40 == 0)) {
-                std::cout << R << " " << tick_count << " " << R * tick_count << std::endl;
                 signal_strength.push_back(R * tick_count);
             }
-            std::cout << i->to_string() << " tick " << tick_count << std::endl;
         }
         R += i->execute();
-        std::cout << tick_count << " R: " << R << std::endl;
     }
 
     int total = 0;
@@ -85,7 +82,7 @@ int main (void) {
         total += i;
     }
 
-    std::cout << "Total: " << total << std::endl; // Part 1
+    std::cout << total << std::endl; // Part 1
 
     return 0;
 }
