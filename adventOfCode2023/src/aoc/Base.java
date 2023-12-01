@@ -61,9 +61,6 @@ abstract public class Base<T> {
         this.input = contentBuilder.toString();
     }
 
-    /**
-     * This method is to convert the input into something usable b y part 1 and 2.
-     */
     public abstract void generator();
 
     public abstract void part1();
