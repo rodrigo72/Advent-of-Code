@@ -3,7 +3,6 @@ package Day2;
 import aoc.Base;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Day2 extends Base<List<Game>> {
