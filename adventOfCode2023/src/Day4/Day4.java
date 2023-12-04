@@ -16,17 +16,14 @@ public class Day4 extends Base<List<Card>> {
             String[] parts = line.split("[:|]");
             Card card = new Card();
 
-            for (int i = 1; i < 3; i++)
-                try {
-                    Set<Integer> numbers = Arrays.stream(parts[i].split(" "))
-                            .filter(s -> !s.equals("") && !s.equals(" "))
-                            .map(Integer::parseInt)
-                            .collect(Collectors.toSet());
-                    if (i == 1) card.setWinningNumbers(numbers);
-                    else card.setNumbers(numbers);
-                } catch (NumberFormatException e) {
-                    System.out.println("Error parsing number");
-                }
+            for (int i = 1; i < 3; i++) {
+                Set<Integer> numbers = Arrays.stream(parts[i].split(" "))
+                        .filter(s -> !s.equals("") && !s.equals(" "))
+                        .map(Integer::parseInt)
+                        .collect(Collectors.toSet());
+                if (i == 1) card.setWinningNumbers(numbers);
+                else card.setNumbers(numbers);
+            }
 
             this.processed.add(card);
         }
@@ -42,8 +39,8 @@ public class Day4 extends Base<List<Card>> {
 
     public void part2() {
         for (Card card : this.processed) {
-            Set<Integer> commonNumbers = card.getCommonNumbers();
-            for (int i = card.getId(); i < card.getId() + commonNumbers.size(); i++)
+            int commonNumbersSize = card.getCommonNumbersSize();
+            for (int i = card.getId(); i < card.getId() + commonNumbersSize; i++)
                 if (i < this.processed.size())
                     this.processed.get(i).incrementInstances(card.getInstances());
 
