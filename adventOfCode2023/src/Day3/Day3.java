@@ -1,6 +1,7 @@
 package Day3;
 import aoc.Base;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Day3 extends Base<Integer> {
     private record Coordinates(int x, int y) {}
