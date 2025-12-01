@@ -52,7 +52,7 @@ def part_2_v2():
 
     with open("input.txt", "r") as file:
         for line in file:
-            line = line.strip().upper()
+            line = line.strip()
             direction = line[0]
             distance = int(line[1:])
 
