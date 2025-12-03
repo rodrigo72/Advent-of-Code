@@ -16,17 +16,17 @@ def part_1(file):
         total += p1 * 10 + p2            
     return total
 
-def part_2(lines, k=12):
+def part_2(file):
     total = 0
-    for line in lines:
+    for line in file:
         bank = line.strip()
         vals = list(map(int, bank))
         n = len(vals)
         prev = -1
         chosen = []
-        for pos in range(k):
+        for pos in range(12):
             start = prev + 1
-            end = n - (k - pos)
+            end = n - (12 - pos)
             max_digit = -1
             max_idx = start
             for idx in range(start, end + 1):
