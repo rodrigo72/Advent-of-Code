@@ -1,5 +1,6 @@
 import time
-import heapq
+from functools import reduce
+
 
 def part_1(file):
     total = 0
@@ -16,32 +17,26 @@ def part_1(file):
         total += p1 * 10 + p2            
     return total
 
+
 def part_2(file):
     total = 0
     for line in file:
-        bank = line.strip()
-        vals = list(map(int, bank))
+        vals = list(map(int, line.strip()))
         n = len(vals)
-        prev = -1
+        start = 0
         chosen = []
-        for pos in range(12):
-            start = prev + 1
-            end = n - (12 - pos)
-            max_digit = -1
-            max_idx = start
-            for idx in range(start, end + 1):
+        for pos in range(12): # 12 values need to be found
+            end = n - 12 + pos  # interval expands 1 pos at the end every iteraton
+            max_idx, max_digit = start, -1
+            for idx in range(start, end + 1):  # find max digit within the interval
                 v = vals[idx]
                 if v > max_digit:
-                    max_digit = v
-                    max_idx = idx
-                    if max_digit == 9:
+                    max_digit, max_idx = v, idx
+                    if max_digit == 9:  # more efficient
                         break
             chosen.append(max_digit)
-            prev = max_idx
-        number = 0
-        for d in chosen:
-            number = number * 10 + d
-        total += number
+            start = max_idx + 1  # set the new start
+        total += reduce(lambda acc, digit: acc * 10 + digit, chosen, 0)
     return total
 
 
