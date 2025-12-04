@@ -17,8 +17,7 @@ def part_1(lines):
             if value == 1:
                 val = 0
                 for i2, j2 in AREA:
-                    i2, j2 = i2+i, j2+j 
-                    val += pad_matrix[i2][j2]
+                    val += pad_matrix[i2+i][j2+j]
                 if val < 4:
                     count += 1
     return count
@@ -35,8 +34,7 @@ def part_2(lines):
                 if value == 1:
                     val = 0
                     for i2, j2 in AREA:
-                        i2, j2 = i2+i, j2+j 
-                        val += pad_matrix[i2][j2]
+                        val += pad_matrix[i2+i][j2+j]
                     if val < 4:
                         coords_removed_rolls.append((i, j))
                         count += 1
