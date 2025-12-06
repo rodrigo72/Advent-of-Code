@@ -15,28 +15,21 @@ def parse_and_refine_intervals(lines):
     ll = LinkedList.from_list(sorted_intervals)  # O(n)
 
     n1 = ll.head
-    n2 = n1.next
-    while n1 and n2:  # O(n)
+    n2 = n1.next if n1 else None
+    
+    while n1 and n2:
         a, b = n1.data
         c, d = n2.data
-        if a == c:
-            if b >= d:  # (3, 10)  (3, 5)
+
+        if a == c:  # same starting point
+            if b >= d:  # (3, 10) (3, 5)
                 ll.delete_node(n2)
                 n2 = n1.next
             else:  # (3, 5) (3, 10)
                 ll.delete_node(n1)
                 n1 = n2
-                n2 = n2.next
-        else:
-            n1 = n2
-            n2 = n2.next
-    
-    n1 = ll.head
-    n2 = n1.next
-    while n1 and n2:  # O(n)
-        a, b = n1.data
-        c, d = n2.data
-        if b >= c:
+                n2 = n2.next if n2 else None
+        elif b >= c: # overlapping
             if b >= d:  # (2, 10) (3, 9) or (2, 10) (3, 10)
                 ll.delete_node(n2)
                 n2 = n1.next
@@ -44,9 +37,9 @@ def parse_and_refine_intervals(lines):
                 n1.data = (a, d)
                 ll.delete_node(n2)
                 n2 = n1.next
-        else:
+        else: # no overlap
             n1 = n2
-            n2 = n2.next
+            n2 = n2.next if n2 else None
     
     return ll.display(), i
 
