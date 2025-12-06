@@ -23,7 +23,7 @@ def part_1(lines):
 
 def part_2(lines):
     total = 0
-    symbols = re.findall(r'([\+\*] *)(?: |$)', lines[-1])
+    symbols = re.findall(r'([+*] *)(?: |$)', lines[-1])
     n_symbols = len(symbols)
     n_rows = len(lines) - 1
     p = 0
@@ -49,14 +49,14 @@ def part_2(lines):
     return total
 
 
+def run(func, arg):
+    T = time.time()
+    print(func(arg))
+    print("Runtime (part 1) =", round(time.time() - T, 4), "seconds\n")
+
+
 if __name__ == '__main__':
     with open("input.txt", "r") as f:
         lines = f.readlines()
-
-    T = time.time()
-    print(part_1(lines))
-    print("Runtime (part 1) =", round(time.time() - T, 4), "seconds\n")
-    
-    T = time.time()
-    print(part_2(lines))
-    print("Runtime (part 2) =", round(time.time() - T, 4), "seconds\n")
+    run(part_1, lines)
+    run(part_2, lines)
