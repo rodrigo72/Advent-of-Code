@@ -52,7 +52,7 @@ def part_2(lines):
 def run(func, arg):
     T = time.time()
     print(func(arg))
-    print("Runtime (part 1) =", round(time.time() - T, 4), "seconds\n")
+    print("Runtime =", round(time.time() - T, 4), "seconds\n")
 
 
 if __name__ == '__main__':
