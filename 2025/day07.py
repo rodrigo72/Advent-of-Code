@@ -2,23 +2,24 @@ import time
 
 
 def part_1(lines):
-    for i, val in enumerate(lines[0]):
-        if val == 'S':
-            break
+    start_col = lines[0].index('S')
     count_splits = 0
-    beam_directions = set({i})
+    beam_directions = {start_col}
     len_columns = len(lines[0])
     for line in lines[1:]:
-        beam_directions_aux = set()
-        for i, char in enumerate(line):
-            if char == '^' and i in beam_directions:
+        if not beam_directions:
+            break
+        new_beams = set()
+        for col in list(beam_directions):
+            if line[col] == '^':
                 count_splits += 1
-                if i+1 < len_columns:
-                    beam_directions_aux.add(i+1)
-                if i-1 >= 0:
-                    beam_directions_aux.add(i-1)
-                beam_directions.remove(i)
-        beam_directions.update(beam_directions_aux)
+                if col + 1 < len_columns:
+                    new_beams.add(col + 1)
+                if col - 1 >= 0:
+                    new_beams.add(col - 1)
+            else:
+                new_beams.add(col)
+        beam_directions = new_beams
     return count_splits
 
 
